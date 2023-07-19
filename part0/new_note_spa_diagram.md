@@ -8,5 +8,6 @@ sequenceDiagram
     server-->>browser: 201 created  
     deactivate server
 
-    Note right of browser: the header 'Content-type' in the POST request tells the server that the included data is JSON; an event handler in the JavaScript code creates a new note using that JSON data, adds it to the list of notes on the page, and sends that note to the server
+    Note right of browser: the header 'Content-type' in the POST request tells the server that the included data is JSON
+    Note right of browser:  an event handler in the JavaScript code creates a new note using that JSON data, adds it to the list of notes on the page, and sends that note to the server
 ```
