@@ -9,7 +9,6 @@ const Course = ({ course }) => {
       <Content parts={course.parts} />
     </>
   )
-
 }
 
 export default Course

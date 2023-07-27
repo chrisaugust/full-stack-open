@@ -1,4 +1,9 @@
-const Total = ({ total }) => {
+const Total = ({ parts }) => {
+
+  const initialValue = 0
+  const total = parts.map(part => part.exercises)
+    .reduce((total, current) => total + current, initialValue) 
+
   return (
     <p>
       <strong>
@@ -6,7 +11,6 @@ const Total = ({ total }) => {
       </strong>
     </p>
   )
-
 }
 
 export default Total

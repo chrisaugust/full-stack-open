@@ -2,11 +2,11 @@ import Part from './Part'
 import Total from './Total'
 
 const Content = ({ parts }) => {
-  const initialValue = 0
-  const total = parts.map(part => part.exercises)
-    .reduce((total, current) => total + current, initialValue)
+  // const initialValue = 0
+  // const total = parts.map(part => part.exercises)
+  //   .reduce((total, current) => total + current, initialValue)
 
-  console.log(total)
+  // console.log(total)
 
   return (
     <>
@@ -14,7 +14,7 @@ const Content = ({ parts }) => {
         <Part key={part.id} part={part} />
       )}
       
-      <Total total={total} />
+      <Total parts={parts} />
     </>
   )
 }
