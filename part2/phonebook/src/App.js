@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import Person from './components/Person'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import FilteredPersons from './components/FilteredPersons'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,7 +13,8 @@ const App = () => {
 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [newFilter, setNewFilter] = useState('')
+  const [newPerson, setNewPerson] = useState({name: '', number: ''})
+  const [filter, setFilter] = useState('')
  
   const handleNameChange = (event) => {
     setNewName(event.target.value)
@@ -21,12 +24,19 @@ const App = () => {
     setNewNumber(event.target.value)
   }
 
-  const handleNewFilterChange = (event) => {
-    console.log(event.target.value)
-    setNewFilter(event.target.value)
+  const handlePersonChange = (event) => {
+    setNewPerson(event.target.value)
   }
 
-  const addName = (event) => {
+  const handleChange = (event) => {
+
+  }
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value)
+  }
+
+  const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName,
@@ -47,52 +57,31 @@ const App = () => {
     const names = persons.map(person => person.name)
     return !names.includes(name)
   }
-  console.log('filter: ', newFilter)
-  const re = new RegExp(newFilter, "i")
-  console.log(persons.filter(person => person.name.match(re)))
   
   return (
     <div>
       <h2>Phonebook</h2>
 
-      <div>
-        filter by:  
-        <input 
-          value={newFilter}
-          onChange={handleNewFilterChange}
-        />
-      </div>
+      <Filter 
+        value={filter} 
+        handler={handleFilterChange} 
+      />
 
       <h2>Add new</h2>
 
-      <form onSubmit={addName}>
-        <div>
-          name: 
-          <input
-            value={newName}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div>
-          number: 
-          <input 
-            value={newNumber}
-            onChange={handleNumberChange}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm 
+        addPerson={addPerson}
+        newPerson={newPerson}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+      />
+
       <h2>Numbers</h2>
-        {
-          persons.filter((person => person.name.match(re)))
-            .map(person => {
-              return (
-                <Person key={person.id} name={person.name} number={person.number} />
-              )
-            })
-        }
+
+      <FilteredPersons 
+        filter={filter} 
+        persons={persons} 
+      />
     </div>
   )
 }
