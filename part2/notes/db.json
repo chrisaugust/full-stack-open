@@ -3,12 +3,12 @@
     {
       "id": 1,
       "content": "HTML is easy",
-      "important": true
+      "important": false
     },
     {
       "id": 2,
       "content": "Browser can execute only JavaScript",
-      "important": false
+      "important": true
     },
     {
       "id": 3,
@@ -19,12 +19,21 @@
       "id": 4,
       "content": "The core teaching of the Buddha is the 4 noble truths",
       "important": true
-
     },
     {
       "id": 5,
       "content": "I just really love dogs!",
-      "important": false
+      "important": true
+    },
+    {
+      "content": "another note",
+      "important": false,
+      "id": 6
+    },
+    {
+      "content": "voluminous white clouds drift in the skies over the NoDa district of Charlotte, North Carolina",
+      "important": false,
+      "id": 7
     }
   ]
 }
