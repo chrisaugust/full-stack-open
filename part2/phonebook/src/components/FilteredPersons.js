@@ -1,5 +1,6 @@
 import Person from './Person'
-const FilteredPersons = ({filter, persons}) => {
+
+const FilteredPersons = ({ filter, persons, removePerson }) => {
   const re = new RegExp(filter, "i")
   return (
     <>
@@ -7,15 +8,21 @@ const FilteredPersons = ({filter, persons}) => {
         persons.filter((person => person.name.match(re)))
           .map(person => {
             return (
-              <Person 
-                key={person.id} 
-                name={person.name} 
-                number={person.number} 
-              />
+              <div className="numbers">
+                <Person 
+                  key={person.id} 
+                  name={person.name} 
+                  number={person.number}
+                />
+                <button onClick={() => removePerson(person.id)}>
+                  delete
+                </button>
+              </div>
             )
           })
       }
     </>
   )
 }
+
 export default FilteredPersons
