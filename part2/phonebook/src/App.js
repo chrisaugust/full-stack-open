@@ -11,8 +11,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [message, setMessage] = useState(null)
-
-  useEffect(() => {
+  
+ useEffect(() => {
      personService
       .getAll()
       .then(initialPersons => {
@@ -32,8 +32,8 @@ const App = () => {
     setFilter(event.target.value)
   }
 
-  const showMessage = (text, isError = false) => {
-    setMessage(text)
+  const showMessage = (text, isError=false) => {
+    setMessage([text, isError])
     setTimeout(() => {
       setMessage(null)
     }, 5000)
@@ -56,7 +56,9 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
-        .catch(error => showMessage(error.response.data.error, true))
+        .catch(error => {
+          showMessage(error.response.data.error, true)
+        })
 
     // update number if name is already in phonebook
     } else {
@@ -76,7 +78,12 @@ const App = () => {
             setNewName('')
             setNewNumber('')
           })
-          .catch(error => showMessage(error.response.data.error, true))
+          .catch(error => {
+            showMessage(`Information for ${newName} has already been removed from server`, true)
+            setPersons(prevPersons => prevPersons.filter(person => person.id !== personToUpdate.id))
+            setNewName('')
+            setNewNumber('')
+          })
       }
     }
   }
@@ -111,7 +118,7 @@ const App = () => {
       <h2>Add new</h2>
 
       <Notification message={message} />
-
+      
       <PersonForm 
         addPerson={addOrUpdatePerson}
         newName={newName}
