@@ -1,3 +1,16 @@
 .flag {
   border: solid 1px;
 }
+
+.country-name {
+  display: flex;
+}
+
+.country-name button {
+  margin: 15px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}

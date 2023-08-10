@@ -3,21 +3,26 @@ import Weather from './Weather'
 const CountryDetails = ({ country }) => {
 
   return (
-    <>
+    <div className='country-details'>
       <h1>{country.name.common}</h1>
-      <p><strong>Capital: </strong>{country.capital[0]}</p>
-      <p><strong>Languages: </strong></p>
+      <p><strong>capital </strong>{country.capital}</p>
+      <p><strong>population </strong>{country.population}</p>
+      <p><strong>area </strong>{country.area} square kilometers</p>
+      <p><strong>region </strong>{country.subregion}</p>
+      <p><strong>languages</strong></p>
       <ul>
-        {Object.values(country.languages).map(language => (
-          <li key={language}>{language}</li>
-        ))}
+        {Object.values(country.languages).map(language => {
+          return (
+            <li>{language}</li>
+          )
+        })}
       </ul>
       <img className='flag'
         src={country.flags.png}
-        alt={country.flags.alt}
       />
-      <Weather city={country.capital[0]} />
-    </>
+
+      <Weather city={country.capital} />
+    </div>
   )
 }
 

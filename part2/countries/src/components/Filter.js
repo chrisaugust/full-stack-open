@@ -1,11 +1,11 @@
-const Filter = ({value, handler}) => {
+const Filter = ({ filterValue, handler }) => {
   return (
     <div>
-      find countries: {" "} 
-      <input 
-        value={value}
+      find countries: {" "}
+      <input
+        value={filterValue}
         onChange={handler}
-      />  
+      />
     </div>
   )
 }
