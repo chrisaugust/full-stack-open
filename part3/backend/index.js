@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const Note = require('./models/note')
 
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -18,35 +20,14 @@ app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
 
-let notes = [
-	{
-		id: 1,
-		content: "HTML is easy",
-		important: true
-	},
-	{
-		id: 2,
-		content: "Browser can execute only JavaScript",
-		important: false
-	},
-	{
-		id: 3,
-		content: "GET and POST are the most important methods of the HTTP protocol",
-		important: true
-	},
-	{
-		id: 4,
-		content: "Express is pretty sweet",
-		important: false
-	}
-];
-
 app.get('/', (request, response) => {
 	response.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/notes', (request, response) => {
-	response.json(notes)
+	Note.find({}).then(notes => {
+		response.json(notes)
+	})
 })
 
 app.get('/api/notes/:id', (request, response) => {
@@ -98,7 +79,7 @@ app.post('/api/notes', (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
